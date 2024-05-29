@@ -15,10 +15,8 @@ const Login = () => {
     const users = useSelector(state => state.user.users);
 
     const handleLogin = (userData) => {
-        console.log(userData, "userdata")
         const user = users.find(user => user.email === userData?.email && user.password === userData?.password);
         localStorage.setItem('currentUser', JSON.stringify(user));
-        console.log(user,"testing")
         if (user) {
             dispatch(login(user));
             localStorage.setItem('isLoggedIn', true);

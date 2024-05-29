@@ -71,7 +71,7 @@ const SignUpPage = () => {
                                     <Typography variant='h5' className='text-lg'>Register</Typography>
                                 </Grid>
                                 <TextField
-                                autoComplete
+                                
                                     required
                                     name='firstName'
                                     placeholder='First Name'
@@ -137,7 +137,7 @@ const SignUpPage = () => {
                                     onBlur={formik.handleBlur}
                                     error={formik.touched.password && Boolean(formik.errors.password)}
                                     helperText={formik.touched.password && formik.errors.password}
-                                    id="outlined-password-input"
+                                    id="password"
                                     label="Password"
                                     type="password"
                                     fullWidth

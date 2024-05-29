@@ -119,7 +119,6 @@ function DashboardPage() {
     }
 
     const handleSearchChange = (event) => {
-        console.log('values change hori gai')
         dispatch(handleSearch(event.target.value));
     };
 
@@ -241,7 +240,7 @@ function DashboardPage() {
                                             </TableCell>
                                             <TableCell>{row.description}</TableCell>
                                             <TableCell>
-                                            <Switch   onClick={() => handleNotesStatus(row.id)} sx={{color: '#6437B4 !important'}}/>
+                                            <Switch checked={row.status} onClick={() => handleNotesStatus(row.id)} sx={{color: '#6437B4 !important'}}/>
                                             </TableCell>
                                             <TableCell>
                                                 <Box display="flex" alignItems="center" spacing={4}>
