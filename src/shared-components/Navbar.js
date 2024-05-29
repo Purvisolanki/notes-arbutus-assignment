@@ -125,11 +125,11 @@ export default function PrimarySearchAppBar() {
       onClose={handleMenuClose}
     >
       <MenuItem onClick={handleProfilePage}>
-        <AccountCircle fontSize='medium' sx={{ color: '#818cf8' }} />
+        <AccountCircle fontSize='medium' sx={{ color: '#6437B4' }} />
         Profile
       </MenuItem>
       <MenuItem fontSize='medium' onClick={handleLogout}>
-        <ExitToAppIcon sx={{ color: '#818cf8' }} />
+        <ExitToAppIcon sx={{ color: '#6437B4' }} />
         Log out
       </MenuItem>
     </Menu>
@@ -178,32 +178,9 @@ export default function PrimarySearchAppBar() {
     </Menu>
   );
 
-  const dashboardMenuId = 'dashboard-menu';
-  const renderDashboardMenu = (
-    <Menu
-      anchorEl={dashboardAnchorEl}
-      anchorOrigin={{
-        vertical: 'top',
-        horizontal: 'left',
-      }}
-      id={dashboardMenuId}
-      keepMounted
-      transformOrigin={{
-        vertical: 'top',
-        horizontal: 'left',
-      }}
-      open={isDashboardMenuOpen}
-      onClose={handleDashboardMenuClose}
-    >
-      <MenuItem onClick={() => navigate('/dashboard')}>
-        <Typography variant="inherit">Dashboard</Typography>
-      </MenuItem>
-    </Menu>
-  );
-
   return (
     <Box sx={{ flexGrow: 1 }}>
-      <AppBar position="static" sx={{ backgroundColor: '#818cf8' }}>
+      <AppBar position="static" sx={{ backgroundColor: '#6437B4' }}>
         <Toolbar>
           <Box sx={{ display: 'flex', alignItems: 'center' }}>
             <IconButton
@@ -212,7 +189,6 @@ export default function PrimarySearchAppBar() {
               color="inherit"
               aria-label="open drawer"
               sx={{ mr: 2 }}
-              aria-controls={dashboardMenuId}
               aria-haspopup="true"
               onClick={handleDashboardMenuOpen}
             >
@@ -267,7 +243,6 @@ export default function PrimarySearchAppBar() {
       </AppBar>
       {renderMobileMenu}
       {renderMenu}
-      {renderDashboardMenu}
     </Box>
   );
 }

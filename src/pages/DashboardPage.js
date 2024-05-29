@@ -12,10 +12,10 @@ import { styled } from '@mui/material/styles';
 import { handleAddNotes, handleCreateDialog, handleDeleteDialog, handleDeleteNote, handleUpdateNote } from "../redux/notesSlice";
 import ModeEditIcon from '@mui/icons-material/ModeEdit';
 import DeleteIcon from '@mui/icons-material/Delete';
-import NoteAddIcon from '@mui/icons-material/NoteAdd';
+import AddCircleIcon from '@mui/icons-material/AddCircle';
 import InfoIcon from '@mui/icons-material/Info';
 
-function Dashboard() {
+function DashboardPage() {
     const { createNotesDialog, deleteNotesDialog } = useSelector((state) => state.notes.dialogState);
     const { notes } = useSelector((state) => state.notes);
     const { searchInput } = useSelector((state) => state.notes);
@@ -130,7 +130,7 @@ function Dashboard() {
                 >
                     {(formik) => (
                         <Form>
-                            <DialogTitle className="bg-[#818CF8] text-white">
+                            <DialogTitle className="bg-[#6437B4] text-white">
                                 {editData ? "Update Notes" : "Create Notes"}
                             </DialogTitle>
                             <DialogContent className="mt-3" >
@@ -175,8 +175,8 @@ function Dashboard() {
                                     }
                                 }}>Cancel</Button>
                                 <Button type="submit" disabled={formik.isSubmitting} sx={{
-                                    border: '1px solid #818CF8', borderRadius: 1, color: '#fff', textTransform: 'capitalize', backgroundColor: '#818CF8', '&:hover': {
-                                        backgroundColor: '#fff', color: '#818CF8',
+                                    border: '1px solid #6437B4', borderRadius: 1, color: '#fff', textTransform: 'capitalize', backgroundColor: '#6437B4', '&:hover': {
+                                        backgroundColor: '#fff', color: '#6437B4',
                                     },
                                 }}>
                                     {editData ? "Update" : "Create"}
@@ -192,16 +192,16 @@ function Dashboard() {
                     <Grid container item justifyContent='space-between' alignItems='center' sx={{ paddingTop: "2%" }}>
                         <Typography variant="h4">List of Notes</Typography>
                         <Button onClick={() => handleDialogOpen()} sx={{
-                            border: '1px solid #818CF8', borderRadius: 1, color: '#fff', textTransform: 'capitalize', backgroundColor: '#818CF8', '&:hover': {
-                                backgroundColor: '#fff', color: '#818CF8',
+                            border: '1px solid #6437B4', borderRadius: 1, color: '#fff', textTransform: 'capitalize', backgroundColor: '#6437B4', '&:hover': {
+                                backgroundColor: '#fff', color: '#6437B4',
                             },
-                        }}><NoteAddIcon fontSize="medium" />&nbsp;
+                        }}><AddCircleIcon fontSize="medium" />&nbsp;
                             Create Notes
                         </Button>
                     </Grid>
                     <TableContainer component={Paper} sx={{ width: "100%", marginTop: '1%' }}>
                         <Table sx={{ minWidth: 650 }} aria-label="simple table">
-                            <TableHead sx={{ backgroundColor: '#818CF8' }}>
+                            <TableHead sx={{ backgroundColor: '#6437B4' }}>
                                 <TableRow >
                                     <TableCell sx={{ color: '#fff' }}>Id</TableCell>
                                     <TableCell sx={{ color: '#fff' }}>Title</TableCell>
@@ -234,7 +234,7 @@ function Dashboard() {
                                                 <ModeEditIcon
                                                     fontSize="small"
                                                     onClick={() => handleUpdate(row)}
-                                                    className="cursor-pointer text-[#818CF8]"
+                                                    className="cursor-pointer text-[#6437B4]"
                                                     style={{ marginRight: '16px' }} // Adjust the margin as needed
                                                 />
                                                 </Tooltip>
@@ -254,7 +254,7 @@ function Dashboard() {
                         </Table>
                         {paginatedNotes.length <= 0 && <Grid item container xs={12} spacing={2} sx={{ height: '500px' }} justifyContent={'center'} alignItems={'center'}>
                             <Grid item>
-                                <InfoIcon sx={{ color: '#818CF8', fontSize: 40 }} />
+                                <InfoIcon sx={{ color: '#6437B4', fontSize: 40 }} />
                             </Grid>
                             <Grid item>
                                 <Typography fontSize={18} fontWeight={600}>Notes Not Found!!</Typography>
@@ -275,7 +275,7 @@ function Dashboard() {
                         open={deleteNotesDialog}
                         onClose={() => dispatch(handleDeleteDialog(false))}
                     >
-                        <DialogTitle className="bg-[#818CF8] text-white">Delete Notes</DialogTitle>
+                        <DialogTitle className="bg-[#6437B4] text-white">Delete Notes</DialogTitle>
                         <DialogContent className="mt-3">
                             <DialogContentText>
                                 Are you sure you want to delete this note?
@@ -288,8 +288,8 @@ function Dashboard() {
                                 }
                             }}>Cancel</Button>
                             <Button onClick={() => deleteNote()} sx={{
-                                border: '1px solid #818CF8', borderRadius: 1, color: '#fff', textTransform: 'capitalize', backgroundColor: '#818CF8', '&:hover': {
-                                    backgroundColor: '#fff', color: '#818CF8',
+                                border: '1px solid #6437B4', borderRadius: 1, color: '#fff', textTransform: 'capitalize', backgroundColor: '#6437B4', '&:hover': {
+                                    backgroundColor: '#fff', color: '#6437B4',
                                 },
                             }}>
                                 Delete
@@ -302,4 +302,4 @@ function Dashboard() {
     );
 }
 
-export default Dashboard;
+export default DashboardPage;
