@@ -8,13 +8,14 @@ import { useDispatch, useSelector } from "react-redux";
 import { Formik, Form } from "formik";
 import * as Yup from "yup";
 import PrimarySearchAppBar from "../shared-components/Navbar";
-import { handleAddNotes, handleCreateDialog, handleDeleteDialog, handleDeleteNote, handleChangePage,handleChangeRowsPerPage ,handleSearch, handleUpdateNote } from "../redux/notesSlice";
+import { handleAddNotes, handleCreateDialog, handleDeleteDialog, handleDeleteNote, handleChangePage,handleChangeRowsPerPage ,handleSearch, handleUpdateNote, handleStatus } from "../redux/notesSlice";
 import ModeEditIcon from '@mui/icons-material/ModeEdit';
 import DeleteIcon from '@mui/icons-material/Delete';
 import AddCircleIcon from '@mui/icons-material/AddCircle';
 import InfoIcon from '@mui/icons-material/Info';
 import { styled, alpha } from '@mui/material/styles';
 import SearchIcon from '@mui/icons-material/Search';
+import toast from "react-hot-toast";
 
 function DashboardPage() {
     const { createNotesDialog, deleteNotesDialog } = useSelector((state) => state.notes.dialogState);
@@ -56,7 +57,7 @@ function DashboardPage() {
         } else {
             const timestamp = new Date().getTime();
             const uniqueId = notes.length + 1 + "_" + timestamp;
-            dispatch(handleAddNotes({ id: uniqueId, ...values }));
+            dispatch(handleAddNotes({ id: uniqueId, status: false, ...values }));
         }
         handleDialogClose();
         resetForm();
@@ -112,6 +113,10 @@ function DashboardPage() {
             margin: 2,
         },
     }));
+
+    const handleNotesStatus = (notesId) => {
+        dispatch(handleStatus(notesId))
+    }
 
     const handleSearchChange = (event) => {
         console.log('values change hori gai')
@@ -175,7 +180,7 @@ function DashboardPage() {
                                     margin="normal"
                                 />
                             </DialogContent>
-                            <DialogActions>
+                            <DialogActions sx={{marginRight: 2, marginBottom: 1}}>
                                 <Button onClick={handleDialogClose} sx={{
                                     backgroundColor: "lightgrey", borderRadius: 1, color: "black", textTransform: 'capitalize', "&:hover": {
                                         backgroundColor: "gray", color: '#fff'
@@ -206,11 +211,11 @@ function DashboardPage() {
                             Create Notes
                         </Button>
                     </Grid>
-                    <TableContainer component={Paper} sx={{ width: "100%", marginTop: '1%', paddingInline: 2 }}>
+                    <TableContainer component={Paper} sx={{ width: "100%", marginTop: '3%', paddingInline: 2 }}>
                         <Grid container marginBlock={2}>
-                        <TextField id="outlined-search" type="search" placeholder="Search Notes..." size="small" autoFocus='false' sx={{position: 'relative'}} onChange={handleSearchChange}>
-                            <SearchIcon fontSize="medium" sx={{position: 'absolute'}}/>
-                        </TextField>
+                            <TextField id="outlined-search" type="search" placeholder="Search Notes..." size="small" autoFocus='false' sx={{ position: 'relative' }} onChange={handleSearchChange}>
+                                <SearchIcon fontSize="medium" sx={{ position: 'absolute' }} />
+                            </TextField>
                         </Grid>
 
                         <Table sx={{ minWidth: 650 }} aria-label="simple table">
@@ -236,30 +241,27 @@ function DashboardPage() {
                                             </TableCell>
                                             <TableCell>{row.description}</TableCell>
                                             <TableCell>
-                                                <FormControlLabel
-                                                    control={<Android12Switch />}
-                                                    label="Status"
-                                                />
+                                            <Switch   onClick={() => handleNotesStatus(row.id)} sx={{color: '#6437B4 !important'}}/>
                                             </TableCell>
                                             <TableCell>
-                                            <Box display="flex" alignItems="center" spacing={4}>
-                                            <Tooltip title="Edit">
-                                                <ModeEditIcon
-                                                    fontSize="small"
-                                                    onClick={() => handleUpdate(row)}
-                                                    className="cursor-pointer text-[#6437B4]"
-                                                    style={{ marginRight: '16px' }} // Adjust the margin as needed
-                                                />
-                                                </Tooltip>
-                                                <Tooltip title="Delete">
-                                                    <DeleteIcon
-                                                        fontSize="small"
-                                                        onClick={() => handleDelete(row.id)}
-                                                        className="cursor-pointer text-red-500"
-                                                    />
-                                                </Tooltip>
-                                            </Box>
-                                        </TableCell>
+                                                <Box display="flex" alignItems="center" spacing={4}>
+                                                    <Tooltip title="Edit">
+                                                        <ModeEditIcon
+                                                            fontSize="small"
+                                                            onClick={() => handleUpdate(row)}
+                                                            className="cursor-pointer text-[#6437B4]"
+                                                            style={{ marginRight: '16px' }} // Adjust the margin as needed
+                                                        />
+                                                    </Tooltip>
+                                                    <Tooltip title="Delete">
+                                                        <DeleteIcon
+                                                            fontSize="small"
+                                                            onClick={() => handleDelete(row.id)}
+                                                            className="cursor-pointer text-red-500"
+                                                        />
+                                                    </Tooltip>
+                                                </Box>
+                                            </TableCell>
                                         </TableRow>
                                     ))
                                 )}

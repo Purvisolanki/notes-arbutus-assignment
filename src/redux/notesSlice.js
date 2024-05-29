@@ -50,10 +50,18 @@ const notesSlice = createSlice({
         },
         handleChangeRowsPerPage: (state, action) => {
             state.pagination.rowsPerPage = action.payload;
-            state.pagination.page = 0; 
+            state.pagination.page = 0;
+        },
+        handleStatus: (state, action) => {
+            console.log(action)
+            const note = state.notes.find(item => item.id === action.payload);
+            if (note) {
+                note.status = !note?.status;
+                toast.success('Status Updated!')
+            }
         }
     },
 });
 
-export const { handleCreateDialog, handleUpdateNote, handleAddNotes, handleDeleteDialog, handleDeleteNote, handleSearch, handleChangePage, handleChangeRowsPerPage } = notesSlice.actions;
+export const { handleCreateDialog, handleUpdateNote, handleAddNotes, handleDeleteDialog, handleDeleteNote, handleSearch, handleChangePage, handleChangeRowsPerPage, handleStatus } = notesSlice.actions;
 export default notesSlice.reducer;

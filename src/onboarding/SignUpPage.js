@@ -71,13 +71,14 @@ const SignUpPage = () => {
                                     <Typography variant='h5' className='text-lg'>Register</Typography>
                                 </Grid>
                                 <TextField
+                                autoComplete
                                     required
                                     name='firstName'
                                     placeholder='First Name'
                                     value={formik.values.firstName}
                                     onChange={formik.handleChange}
                                     onBlur={formik.handleBlur}
-                                    id="outlined-required"
+                                    id="firstName"
                                     label="First Name"
                                     error={formik.touched.firstName && Boolean(formik.errors.firstName)}
                                     helperText={formik.touched.firstName && formik.errors.firstName}
@@ -91,7 +92,7 @@ const SignUpPage = () => {
                                     value={formik.values.lastName}
                                     onChange={formik.handleChange}
                                     onBlur={formik.handleBlur}
-                                    id="outlined-required"
+                                    id="lastName"
                                     label="Last Name"
                                     error={formik.touched.lastName && Boolean(formik.errors.lastName)}
                                     helperText={formik.touched.lastName && formik.errors.lastName}
@@ -106,7 +107,7 @@ const SignUpPage = () => {
                                     value={formik.values.email}
                                     onChange={formik.handleChange}
                                     onBlur={formik.handleBlur}
-                                    id="outlined-required"
+                                    id="email"
                                     label="Email"
                                     error={formik.touched.email && Boolean(formik.errors.email)}
                                     helperText={formik.touched.email && formik.errors.email}
@@ -120,7 +121,7 @@ const SignUpPage = () => {
                                     value={formik.values.phoneNumber}
                                     onChange={formik.handleChange}
                                     onBlur={formik.handleBlur}
-                                    id="outlined-required"
+                                    id="phoneNumber"
                                     label="Phone Number"
                                     error={formik.touched.phoneNumber && Boolean(formik.errors.phoneNumber)}
                                     helperText={formik.touched.phoneNumber && formik.errors.phoneNumber}
