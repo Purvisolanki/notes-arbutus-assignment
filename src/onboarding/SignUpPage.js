@@ -6,6 +6,7 @@ import { Avatar, Button, Grid, TextField, Typography } from '@mui/material';
 import { Form, Formik } from 'formik';
 import * as Yup from 'yup';
 import toast from 'react-hot-toast';
+import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 
 const SignUpPage = () => {
     const dispatch = useDispatch();
@@ -43,12 +44,12 @@ const SignUpPage = () => {
     return (
         <Grid container className='h-screen w-full'>
             <Grid item xs={12} sm={12} md={6}>
-                <img src='assets/loginPage.jpg' className='object-cover object-center w-full h-full' />
+                <img src='assets/login.png' className='object-cover object-center w-full h-full' />
             </Grid>
             <Grid item xs={12} sm={12} md={6}>
                 <Grid container justifyContent='center' alignItems='center' className='w-full' padding={5}>
                     <Grid item container justifyContent="center" alignItems="center">
-                        <Avatar alt="User Profile" sx={{ bgcolor: '#F2F7FB', height: '60px', width: '60px' }} />
+                        <Avatar  sx={{ bgcolor: '#6437B4', height: '50px', width: '50px' }} ><AccountCircleIcon fontSize='large'/></Avatar>
                     </Grid>
                     <Formik
                         initialValues={{
@@ -142,6 +143,9 @@ const SignUpPage = () => {
                                     margin="normal"
                                 />
                                 <Button
+                                sx={{backgroundColor: '#6437B4', marginTop: 2, "&:hover": {
+                                    backgroundColor: "#621A75", color: '#fff'
+                                }}}
                                     type='submit'
                                     variant="contained"
                                     color="primary"
@@ -152,7 +156,7 @@ const SignUpPage = () => {
                                 </Button>
                                 <Grid item container justifyContent='center' alignItems='center'>
                                     <span>Already Have an Account?</span>
-                                    <Link to='/login'> Login</Link>
+                                    <Link to='/login' style={{color: '#6437B4', fontWeight: 'bold', marginTop: 3}}> Login</Link>
                                 </Grid>
                             </Form>
                         )}
