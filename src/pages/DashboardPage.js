@@ -8,7 +8,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { Formik, Form } from "formik";
 import * as Yup from "yup";
 import PrimarySearchAppBar from "../shared-components/Navbar";
-import { handleAddNotes, handleCreateDialog, handleDeleteDialog, handleDeleteNote, handleSearch, handleUpdateNote } from "../redux/notesSlice";
+import { handleAddNotes, handleCreateDialog, handleDeleteDialog, handleDeleteNote, handleChangePage,handleChangeRowsPerPage ,handleSearch, handleUpdateNote } from "../redux/notesSlice";
 import ModeEditIcon from '@mui/icons-material/ModeEdit';
 import DeleteIcon from '@mui/icons-material/Delete';
 import AddCircleIcon from '@mui/icons-material/AddCircle';
@@ -22,18 +22,18 @@ function DashboardPage() {
     const { searchInput } = useSelector((state) => state.notes);
     const [editData, setEditData] = useState(null);
     const [noteId, setNoteId] = useState(null);
-    const [rowsPerPage, setRowsPerPage] = useState(5);
-    const [page, setPage] = useState(0);
+    const { page } = useSelector((state) => state.notes.pagination);
+    const { rowsPerPage } = useSelector((state) => state.notes.pagination);
 
     const dispatch = useDispatch();
 
-    const handleChangePage = (event, newPage) => {
-        setPage(newPage);
+    const ChangePage = (event, newPage) => {
+        dispatch(handleChangePage(newPage));
     };
-
-    const handleChangeRowsPerPage = (event) => {
-        setRowsPerPage(parseInt(event.target.value, 10));
-        setPage(0);
+    
+    const ChangeRowsPerPage = (event) => {
+        dispatch(handleChangeRowsPerPage(parseInt(event.target.value, 10)));
+        dispatch(handleChangePage(0));
     };
 
     const handleDialogOpen = (data = null) => {
@@ -279,8 +279,8 @@ function DashboardPage() {
                             count={filteredNotes.length}
                             rowsPerPage={rowsPerPage}
                             page={page}
-                            onPageChange={handleChangePage}
-                            onRowsPerPageChange={handleChangeRowsPerPage}
+                            onPageChange={ChangePage}
+                            onRowsPerPageChange={ChangeRowsPerPage}
                         />
                     </TableContainer>
 
