@@ -13,18 +13,15 @@ import MoreIcon from '@mui/icons-material/MoreVert';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { logout } from '../redux/userSlice';
-import { handleSearch } from '../redux/notesSlice';
 import GridViewIcon from '@mui/icons-material/GridView';
 
 
 export default function PrimarySearchAppBar() {
   const [anchorEl, setAnchorEl] = React.useState(null);
   const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(null);
-  const [dashboardAnchorEl, setDashboardAnchorEl] = React.useState(null);
   const dispatch = useDispatch();
   const isMenuOpen = Boolean(anchorEl);
   const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
-  const isDashboardMenuOpen = Boolean(dashboardAnchorEl);
   const navigate = useNavigate();
   const location = useLocation();
 
@@ -42,14 +39,7 @@ export default function PrimarySearchAppBar() {
     setAnchorEl(event.currentTarget);
   };
 
-  const handleDashboardMenuOpen = (event) => {
-    setDashboardAnchorEl(event.currentTarget);
-  };
-
-  const handleDashboardMenuClose = () => {
-    setDashboardAnchorEl(null);
-  };
-
+  
   const handleMobileMenuClose = () => {
     setMobileMoreAnchorEl(null);
   };
@@ -63,9 +53,7 @@ export default function PrimarySearchAppBar() {
     setMobileMoreAnchorEl(event.currentTarget);
   };
 
-  const handleSearchChange = (event) => {
-    dispatch(handleSearch(event.target.value));
-  };
+
 
   const menuId = 'primary-search-account-menu';
   const renderMenu = (

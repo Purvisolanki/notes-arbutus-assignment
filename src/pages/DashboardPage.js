@@ -8,7 +8,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { Formik, Form } from "formik";
 import * as Yup from "yup";
 import PrimarySearchAppBar from "../shared-components/Navbar";
-import { handleAddNotes, handleCreateDialog, handleDeleteDialog, handleDeleteNote, handleChangePage,handleChangeRowsPerPage ,handleSearch, handleUpdateNote, handleStatus } from "../redux/notesSlice";
+import { handleAddNotes, handleCreateDialog, handleDeleteDialog, handleDeleteNote, handleChangePage, handleChangeRowsPerPage, handleSearch, handleUpdateNote, handleStatus } from "../redux/notesSlice";
 import ModeEditIcon from '@mui/icons-material/ModeEdit';
 import DeleteIcon from '@mui/icons-material/Delete';
 import AddCircleIcon from '@mui/icons-material/AddCircle';
@@ -31,7 +31,7 @@ function DashboardPage() {
     const ChangePage = (event, newPage) => {
         dispatch(handleChangePage(newPage));
     };
-    
+
     const ChangeRowsPerPage = (event) => {
         dispatch(handleChangeRowsPerPage(parseInt(event.target.value, 10)));
         dispatch(handleChangePage(0));
@@ -122,7 +122,6 @@ function DashboardPage() {
         dispatch(handleSearch(event.target.value));
     };
 
-
     const filteredNotes = notes.filter((note) => note.title.toLowerCase().includes(searchInput.toLowerCase()));
 
     const paginatedNotes = filteredNotes.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage);
@@ -151,12 +150,12 @@ function DashboardPage() {
                                 <TextField
                                     required
                                     type='text'
+                                    id="title"
                                     name='title'
                                     placeholder='Title'
                                     value={formik.values.title}
                                     onChange={formik.handleChange}
                                     onBlur={formik.handleBlur}
-                                    id="outlined-required"
                                     label="Title"
                                     error={formik.touched.title && Boolean(formik.errors.title)}
                                     helperText={formik.touched.title && formik.errors.title}
@@ -166,12 +165,12 @@ function DashboardPage() {
                                 <TextField
                                     required
                                     type='text'
+                                    id="description"
                                     name='description'
                                     placeholder='Description'
                                     value={formik.values.description}
                                     onChange={formik.handleChange}
                                     onBlur={formik.handleBlur}
-                                    id="outlined-required"
                                     label="Description"
                                     error={formik.touched.description && Boolean(formik.errors.description)}
                                     helperText={formik.touched.description && formik.errors.description}
@@ -179,7 +178,7 @@ function DashboardPage() {
                                     margin="normal"
                                 />
                             </DialogContent>
-                            <DialogActions sx={{marginRight: 2, marginBottom: 1}}>
+                            <DialogActions sx={{ marginRight: 2, marginBottom: 1 }}>
                                 <Button onClick={handleDialogClose} sx={{
                                     backgroundColor: "lightgrey", borderRadius: 1, color: "black", textTransform: 'capitalize', "&:hover": {
                                         backgroundColor: "gray", color: '#fff'
@@ -212,7 +211,7 @@ function DashboardPage() {
                     </Grid>
                     <TableContainer component={Paper} sx={{ width: "100%", marginTop: '3%', paddingInline: 2 }}>
                         <Grid container marginBlock={2}>
-                            <TextField id="outlined-search" type="search" placeholder="Search Notes..." size="small" autoFocus='false' sx={{ position: 'relative' }} onChange={handleSearchChange}>
+                            <TextField id="outlined-search" type="search" placeholder="Search Notes..." size="small" sx={{ position: 'relative' }} onChange={handleSearchChange}>
                                 <SearchIcon fontSize="medium" sx={{ position: 'absolute' }} />
                             </TextField>
                         </Grid>
@@ -236,11 +235,11 @@ function DashboardPage() {
                                         >
                                             <TableCell>{page * rowsPerPage + index + 1}</TableCell>
                                             <TableCell component="th" scope="row">
-                                                {row.title}
+                                                {row?.title}
                                             </TableCell>
-                                            <TableCell>{row.description}</TableCell>
+                                            <TableCell>{row?.description}</TableCell>
                                             <TableCell>
-                                            <Switch checked={row.status} onClick={() => handleNotesStatus(row.id)} sx={{color: '#6437B4 !important'}}/>
+                                                <Switch checked={row?.status} onClick={() => handleNotesStatus(row.id)} sx={{ color: '#6437B4 !important' }} />
                                             </TableCell>
                                             <TableCell>
                                                 <Box display="flex" alignItems="center" spacing={4}>
@@ -292,7 +291,7 @@ function DashboardPage() {
                         <DialogTitle className="bg-[#6437B4] text-white">Delete Notes</DialogTitle>
                         <DialogContent className="mt-3">
                             <DialogContentText>
-                                Are you sure you want to delete this note?
+                                Do you really want to delete this note?
                             </DialogContentText>
                         </DialogContent>
                         <DialogActions>

@@ -53,7 +53,6 @@ const notesSlice = createSlice({
             state.pagination.page = 0;
         },
         handleStatus: (state, action) => {
-            console.log(action)
             const note = state.notes.find(item => item.id === action.payload);
             if (note) {
                 note.status = !note?.status;

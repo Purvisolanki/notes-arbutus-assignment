@@ -54,19 +54,19 @@ const ProfilePage = () => {
 
                     <Grid item container gap={1}>
                         <Typography variant='h6'>First Name</Typography>
-                        <TextField id="outlined-basic" variant="outlined" size='small' value={currentUser?.firstname} fullWidth disabled />
+                        <TextField id="firstname" variant="outlined" size='small' defaultValue={currentUser?.firstname} fullWidth disabled />
                     </Grid>
                     <Grid item container gap={1}>
                         <Typography variant='h6'>Last Name</Typography>
-                        <TextField id="outlined-basic" variant="outlined" size='small' value={currentUser?.lastname} fullWidth disabled />
+                        <TextField id="lastname" variant="outlined" size='small' defaultValue={currentUser?.lastname} fullWidth disabled />
                     </Grid>
                     <Grid item container gap={1}>
                         <Typography variant='h6'>Email Address</Typography>
-                        <TextField id="outlined-basic" variant="outlined" size='small' value={currentUser?.email} fullWidth disabled />
+                        <TextField id="email" variant="outlined" size='small' defaultValue={currentUser?.email} fullWidth disabled />
                     </Grid>
                     <Grid item container gap={1}>
                         <Typography variant='h6'>Mobile Phone</Typography>
-                        <TextField id="outlined-basic" variant="outlined" size='small' value={currentUser?.number} fullWidth disabled />
+                        <TextField id="number" variant="outlined" size='small' defaultValue={currentUser?.number} fullWidth disabled />
                     </Grid>
                     <Grid item container justifyContent='flex-end'>
                         <Button
