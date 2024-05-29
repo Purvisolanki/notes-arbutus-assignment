@@ -65,7 +65,7 @@ const Login = () => {
                         }}
                     >
                         {(formik) => (
-                            <Form className='w-full sm:w-2/3 md:w-3/5'>
+                            <Form className='w-full sm:w-2/3 lg:w-3/5'>
                                 <Grid item container justifyContent='center' alignItems='center'>
                                     <Typography variant='h4' className='text-lg'>Login</Typography>
                                 </Grid>
@@ -102,8 +102,8 @@ const Login = () => {
                                     margin="normal"
                                 />
                                 <Button
-                                sx={{backgroundColor: '#6437B4', marginTop: 2, "&:hover": {
-                                    backgroundColor: "#621A75", color: '#fff'
+                                sx={{backgroundColor: '#6437B4', marginTop: 2, paddingBlock: 1.3, borderRadius: 2, textTransform: 'capitalize',letterSpacing: '0.1em', "&:hover": {
+                                    backgroundColor: "#621A75", color: '#fff',
                                 }}}
                                     type='submit'
                                     variant="contained"
@@ -114,9 +114,9 @@ const Login = () => {
                                 >
                                     Login
                                 </Button>
-                                <Grid item container justifyContent='center' alignItems='center'>
+                                <Grid item container justifyContent='center' alignItems='center'  marginTop={2}>
                                     <span>Don't Have an Account?</span>
-                                    <Link to='/register' style={{color: '#6437B4', fontWeight: 'bold', marginTop: 3}}> Register</Link>
+                                    <Link to='/register' style={{color: '#6437B4', fontWeight: 'bold',}}> Register</Link>
                                 </Grid>
                             </Form>
                         )}

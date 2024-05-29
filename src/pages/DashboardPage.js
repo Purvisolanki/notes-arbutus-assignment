@@ -15,7 +15,6 @@ import AddCircleIcon from '@mui/icons-material/AddCircle';
 import InfoIcon from '@mui/icons-material/Info';
 import { styled, alpha } from '@mui/material/styles';
 import SearchIcon from '@mui/icons-material/Search';
-import InputBase from '@mui/material/InputBase';
 
 function DashboardPage() {
     const { createNotesDialog, deleteNotesDialog } = useSelector((state) => state.notes.dialogState);
@@ -25,47 +24,6 @@ function DashboardPage() {
     const [noteId, setNoteId] = useState(null);
     const [rowsPerPage, setRowsPerPage] = useState(5);
     const [page, setPage] = useState(0);
-
-    const Search = styled('div')(({ theme }) => ({
-        position: 'relative',
-        border: '1px solid #6437B4',
-        borderRadius: theme.shape.borderRadius,
-        backgroundColor: alpha(theme.palette.common.white, 0.15),
-        '&:hover': {
-            backgroundColor: alpha(theme.palette.common.white, 0.25),
-        },
-        marginRight: theme.spacing(2),
-        marginLeft: 0,
-        width: '100%',
-        [theme.breakpoints.up('sm')]: {
-            // marginLeft: theme.spacing(3),
-            width: 'auto',
-        },
-    }));
-
-    const SearchIconWrapper = styled('div')(({ theme }) => ({
-        padding: theme.spacing(0, 2),
-        height: '100%',
-        position: 'absolute',
-        pointerEvents: 'none',
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'center',
-    }));
-
-    const StyledInputBase = styled(InputBase)(({ theme }) => ({
-        color: 'inherit',
-        '& .MuiInputBase-input': {
-            padding: theme.spacing(1, 1, 1, 0),
-            // vertical padding + font size from searchIcon
-            paddingLeft: `calc(1em + ${theme.spacing(4)})`,
-            transition: theme.transitions.create('width'),
-            width: '100%',
-            [theme.breakpoints.up('md')]: {
-                width: '20ch',
-            },
-        },
-    }));
 
     const dispatch = useDispatch();
 
@@ -156,6 +114,7 @@ function DashboardPage() {
     }));
 
     const handleSearchChange = (event) => {
+        console.log('values change hori gai')
         dispatch(handleSearch(event.target.value));
     };
 
@@ -238,7 +197,7 @@ function DashboardPage() {
             <div>
                 <Grid container width='90%' marginInline='auto'>
                     <Grid container item justifyContent='space-between' alignItems='center' sx={{ paddingTop: "2%" }}>
-                        <Typography variant="h4">List of Notes</Typography>
+                        <Typography variant="h5" >List of Notes</Typography>
                         <Button onClick={() => handleDialogOpen()} sx={{
                             border: '1px solid #6437B4', borderRadius: 1, color: '#fff', textTransform: 'capitalize', backgroundColor: '#6437B4', '&:hover': {
                                 backgroundColor: '#fff', color: '#6437B4',
@@ -249,16 +208,9 @@ function DashboardPage() {
                     </Grid>
                     <TableContainer component={Paper} sx={{ width: "100%", marginTop: '1%', paddingInline: 2 }}>
                         <Grid container marginBlock={2}>
-                            <Search>
-                                <SearchIconWrapper>
-                                    <SearchIcon />
-                                </SearchIconWrapper>
-                                <StyledInputBase
-                                    placeholder="Search…"
-                                    onChange={handleSearchChange}
-                                    inputProps={{ 'aria-label': 'search' }}
-                                />
-                            </Search>
+                        <TextField id="outlined-search" type="search" placeholder="Search Notes..." size="small" autoFocus='false' sx={{position: 'relative'}} onChange={handleSearchChange}>
+                            <SearchIcon fontSize="medium" sx={{position: 'absolute'}}/>
+                        </TextField>
                         </Grid>
 
                         <Table sx={{ minWidth: 650 }} aria-label="simple table">

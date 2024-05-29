@@ -46,7 +46,7 @@ const SignUpPage = () => {
             <Grid item xs={12} sm={12} md={6}>
                 <img src='assets/login.png' className='object-cover object-center w-full h-full' />
             </Grid>
-            <Grid item xs={12} sm={12} md={6}>
+            <Grid item xs={12} sm={12} md={6} container justifyContent="center" alignItems="center">
                 <Grid container justifyContent='center' alignItems='center' className='w-full' padding={5}>
                     <Grid item container justifyContent="center" alignItems="center">
                         <Avatar  sx={{ bgcolor: '#6437B4', height: '50px', width: '50px' }} ><AccountCircleIcon fontSize='large'/></Avatar>
@@ -66,7 +66,7 @@ const SignUpPage = () => {
                         }}
                     >
                         {(formik) => (
-                            <Form className='w-full sm:w-2/3 md:w-3/5'>
+                            <Form className='w-full sm:w-2/3 lg:w-3/5'>
                                 <Grid item container justifyContent='center' alignItems='center'>
                                     <Typography variant='h5' className='text-lg'>Register</Typography>
                                 </Grid>
@@ -143,8 +143,8 @@ const SignUpPage = () => {
                                     margin="normal"
                                 />
                                 <Button
-                                sx={{backgroundColor: '#6437B4', marginTop: 2, "&:hover": {
-                                    backgroundColor: "#621A75", color: '#fff'
+                                sx={{backgroundColor: '#6437B4', marginTop: 2, paddingBlock: 1.3, borderRadius: 2, textTransform: 'capitalize',letterSpacing: '0.1em', "&:hover": {
+                                    backgroundColor: "#621A75", color: '#fff',
                                 }}}
                                     type='submit'
                                     variant="contained"
@@ -154,9 +154,9 @@ const SignUpPage = () => {
                                 >
                                     Register
                                 </Button>
-                                <Grid item container justifyContent='center' alignItems='center'>
+                                <Grid item container justifyContent='center' alignItems='center'  marginTop={2}>
                                     <span>Already Have an Account?</span>
-                                    <Link to='/login' style={{color: '#6437B4', fontWeight: 'bold', marginTop: 3}}> Login</Link>
+                                    <Link to='/login' style={{color: '#6437B4', fontWeight: 'bold'}}> Login</Link>
                                 </Grid>
                             </Form>
                         )}

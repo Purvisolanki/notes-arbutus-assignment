@@ -6,6 +6,7 @@ import { TextField, Dialog, DialogActions, DialogContent, DialogTitle, Paper, Ta
 import { Container, Card, CardContent, Typography, Button, Grid, Avatar, Link } from '@mui/material';
 import { handleUpdateUser, handleUpdateUserDialog, login } from "../redux/userSlice";
 import EditIcon from '@mui/icons-material/Edit';
+import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import PrimarySearchAppBar from '../shared-components/Navbar';
 import PersonIcon from '@mui/icons-material/Person';
 
@@ -47,65 +48,42 @@ const ProfilePage = () => {
     return (
         <>
             <PrimarySearchAppBar />
-            <Grid container justifyContent='flex-end' paddingRight={4} paddingTop={4}>
-                <Button 
-                    sx={{
-                        border: '1px solid #6437B4', borderRadius: 1, color: '#6437B4', textTransform: 'capitalize', backgroundColor: '#fff', '&:hover': {
-                            backgroundColor: '#6437B4', color: '#fff',
-                        },
-                    }}>
-                    <Link to='/dashboard' style={{ textDecoration: 'none', color: 'inherit' }}>Return To Dashboard</Link>
-                </Button>
+            <Grid container marginLeft={3} marginTop={3} direction='column' sx={{ width: { xs: '80%', md: '40%', lg: '30%' } }}>
+                <Grid item marginBottom={2}><Typography variant='h5'>Account Settings</Typography></Grid>
+                <Grid item container direction='column' gap={2} marginLeft={2}>
+
+                    <Grid item container gap={1}>
+                        <Typography variant='h6'>First Name</Typography>
+                        <TextField id="outlined-basic" variant="outlined" size='small' value={currentUser?.firstname} fullWidth disabled />
+                    </Grid>
+                    <Grid item container gap={1}>
+                        <Typography variant='h6'>Last Name</Typography>
+                        <TextField id="outlined-basic" variant="outlined" size='small' value={currentUser?.lastname} fullWidth disabled />
+                    </Grid>
+                    <Grid item container gap={1}>
+                        <Typography variant='h6'>Email Address</Typography>
+                        <TextField id="outlined-basic" variant="outlined" size='small' value={currentUser?.email} fullWidth disabled />
+                    </Grid>
+                    <Grid item container gap={1}>
+                        <Typography variant='h6'>Mobile Phone</Typography>
+                        <TextField id="outlined-basic" variant="outlined" size='small' value={currentUser?.number} fullWidth disabled />
+                    </Grid>
+                    <Grid item container justifyContent='flex-end'>
+                        <Button
+                            sx={{
+                                border: '1px solid #6437B4', borderRadius: 1, color: '#fff', textTransform: 'capitalize', backgroundColor: '#6437B4', '&:hover': {
+                                    backgroundColor: '#fff', color: '#6437B4',
+                                },
+                            }}
+                            onClick={() => handleUpdate(currentUser)}
+                        >
+                            Update Profile
+                        </Button>
+                    </Grid>
+
+                </Grid>
             </Grid>
-            <Container maxWidth="sm" sx={{ paddingTop: "5%" }}>
-                <Card sx={{ boxShadow: '0 4px 12px rgba(0, 0, 0, 0.1)', borderRadius: 3 }}>
-                    <CardContent sx={{ paddingBlock: 4 }}>
-                        <Grid container spacing={2} direction='column'>
-                            <Grid item container justifyContent='center' alignItems='center' direction='column'>
-                                <Grid item>
-                                    <Avatar sx={{ bgcolor: '#6437B4', height: '80px', width: '80px' }} >
-                                        <Avatar sx={{ bgcolor: '#E4F1FE', height: '72px', width: '72px' }} >
-                                            <PersonIcon fontSize='large' sx={{ color: '#6437B4' }} />
-                                        </Avatar>
-                                    </Avatar>
-                                </Grid>
-                                <Grid item container justifyContent='center' gap={2} marginTop={3} sx={{ fontSize: { xs: '1rem', sm: '1.2rem', md: '1.4rem' } }}>
-                                    <Grid item container gap={1} paddingInline={2}>
-                                        <Typography variant="h6" sx={{ fontWeight: 'bold' }}>First Name:</Typography>
-                                        <Typography variant="h6">{currentUser?.firstname}</Typography>
-                                    </Grid>
-                                    <Grid item container gap={1} paddingInline={2}>
-                                        <Typography variant="h6" sx={{ fontWeight: 'bold' }}>Last Name:</Typography>
-                                        <Typography variant="h6">{currentUser?.lastname}</Typography>
-                                    </Grid>
-                                    <Grid item container gap={1} paddingInline={2}>
-                                        <Typography variant="h6" sx={{ fontWeight: 'bold' }}>Email:</Typography>
-                                        <Typography variant="h6">{currentUser?.email}</Typography>
-                                    </Grid>
-                                    <Grid item container gap={1} paddingInline={2}>
-                                        <Typography variant='h6' sx={{ fontWeight: 'bold' }}>Phone Number:</Typography>
-                                        <Typography variant="h6">{currentUser?.number}</Typography>
-                                    </Grid>
-                                </Grid>
-                            </Grid>
-                        </Grid>
-                    </CardContent>
-                    <CardContent>
-                        <Grid container spacing={2} alignItems="center" direction='column'>
-                            <Button
-                                sx={{
-                                    border: '1px solid #4A90E2', borderRadius: 1, color: '#fff', textTransform: 'capitalize', backgroundColor: '#6437B4', '&:hover': {
-                                        backgroundColor: '#fff', color: '#4A90E2',
-                                    },
-                                }}
-                                onClick={() => handleUpdate(currentUser)}
-                            >
-                                Update Profile
-                            </Button>
-                        </Grid>
-                    </CardContent>
-                </Card>
-            </Container>
+            
             <Dialog open={UpdateUserDialog} onClose={handleDialogClose}>
                 <Formik
                     initialValues={{
@@ -119,10 +97,8 @@ const ProfilePage = () => {
                         <Form>
                             <DialogTitle>
                                 <Grid item container justifyContent="center" alignItems="center" direction='column'>
-                                    <Avatar sx={{ bgcolor: '#6437B4', height: '60px', width: '60px' }} >
-                                        <Avatar sx={{ bgcolor: '#E4F1FE', height: '52px', width: '52px' }} >
-                                            <PersonIcon fontSize='large' sx={{ color: '#6437B4' }} />
-                                        </Avatar>
+                                    <Avatar sx={{ bgcolor: '#6437B4', height: '50px', width: '50px' }} >
+                                        <AccountCircleIcon fontSize='large' sx={{ color: '#fff' }} />
                                     </Avatar>
                                     Update Profile
                                 </Grid>
@@ -174,26 +150,26 @@ const ProfilePage = () => {
                                 />
                             </DialogContent>
                             <DialogActions>
-                                <Button 
+                                <Button
                                     sx={{
                                         backgroundColor: "lightgrey", borderRadius: 1, color: "black", textTransform: 'capitalize', "&:hover": {
                                             backgroundColor: "gray", color: '#fff'
                                         }
-                                    }} 
+                                    }}
                                     onClick={handleDialogClose}
                                 >
                                     Cancel
                                 </Button>
-                                <Button 
-                                    type="submit" 
-                                    disabled={formik.isSubmitting} 
+                                <Button
+                                    type="submit"
+                                    disabled={formik.isSubmitting}
                                     sx={{
-                                        border: '1px solid #4A90E2', borderRadius: 1, color: '#fff', textTransform: 'capitalize', backgroundColor: '#6437B4', '&:hover': {
+                                        border: '1px solid #6437B4', borderRadius: 1, color: '#fff', textTransform: 'capitalize', backgroundColor: '#6437B4', '&:hover': {
                                             backgroundColor: '#fff', color: '#6437B4',
                                         },
-                                    }} 
+                                    }}
                                 >
-                                     Update
+                                    Update
                                 </Button>
                             </DialogActions>
                         </Form>
